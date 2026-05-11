@@ -1,7 +1,23 @@
 <script>
+    import { onMount } from 'svelte';
     import Navbar from '../../components/Navbar.svelte';
     import Footer from '../../components/Footer.svelte';
-    import AdSense from '../../components/AdSense.svelte';
+
+    onMount(() => {
+        // Reveal animations
+        import('gsap').then(({ gsap }) => {
+            gsap.utils.toArray('.reveal').forEach((el, i) => {
+                gsap.from(el, {
+                    scrollTrigger: { trigger: el, start: 'top 85%', toggleActions: 'play none none none' },
+                    y: 30,
+                    opacity: 0,
+                    duration: 0.8,
+                    delay: i * 0.05,
+                    ease: 'power2.out'
+                });
+            });
+        });
+    });
 
     const perks = [
         {
@@ -43,7 +59,7 @@
 <Navbar />
 
 <!-- Page hero -->
-<div class="bg-surface-mid border-b border-ink-faint/30 pt-12 pb-20">
+<div class="bg-surface-mid border-b border-ink-faint/30 pt-12 pb-20 reveal">
     <div class="max-w-site mx-auto px-5 lg:px-16">
         <p class="text-[10px] font-semibold tracking-[0.22em] uppercase text-sage mb-5">Get Involved</p>
         <h1 class="font-display font-bold text-ink leading-[1.15]" style="font-size: clamp(2.4rem, 5vw, 4rem);">
@@ -57,7 +73,7 @@
 </div>
 
 <!-- Why volunteer perks -->
-<section class="py-20 lg:py-28 bg-surface">
+<section class="py-20 lg:py-28 bg-surface reveal">
     <div class="max-w-site mx-auto px-5 lg:px-16">
         <p class="text-[10px] font-semibold tracking-[0.22em] uppercase text-sage mb-4">Why Volunteer</p>
         <h2 class="font-display font-bold text-ink mb-12" style="font-size: clamp(1.6rem, 3vw, 2.2rem);">
@@ -79,10 +95,8 @@
     </div>
 </section>
 
-<AdSense />
-
 <!-- Form + contact -->
-<section class="py-20 lg:py-28 bg-surface-mid">
+<section class="py-20 lg:py-28 bg-surface-mid reveal">
     <div class="max-w-site mx-auto px-5 lg:px-16">
         <div class="grid grid-cols-1 lg:grid-cols-5 gap-12">
 
@@ -159,7 +173,7 @@
 </section>
 
 <!-- Opportunities -->
-<section class="py-20 lg:py-28 bg-surface">
+<section class="py-20 lg:py-28 bg-surface reveal">
     <div class="max-w-site mx-auto px-5 lg:px-16">
         <p class="text-[10px] font-semibold tracking-[0.22em] uppercase text-sage mb-4">Roles Available</p>
         <h2 class="font-display font-bold text-ink mb-12" style="font-size: clamp(1.6rem, 3vw, 2.2rem);">
@@ -184,5 +198,4 @@
     </div>
 </section>
 
-<AdSense />
 <Footer />

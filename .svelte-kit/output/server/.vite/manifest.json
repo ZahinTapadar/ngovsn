@@ -9,20 +9,13 @@
       "_internal.js"
     ]
   },
-  "_AdSense.js": {
-    "file": "chunks/AdSense.js",
-    "name": "AdSense",
+  "_Footer.js": {
+    "file": "chunks/Footer.js",
+    "name": "Footer",
     "imports": [
       "_environment.js",
       "_stores.js"
-    ],
-    "css": [
-      "_app/immutable/assets/AdSense.nzLUUWon.css"
     ]
-  },
-  "_AdSense.nzLUUWon.css": {
-    "file": "_app/immutable/assets/AdSense.nzLUUWon.css",
-    "src": "_AdSense.nzLUUWon.css"
   },
   "_client.js": {
     "file": "chunks/client.js",
@@ -129,7 +122,7 @@
     "isEntry": true,
     "imports": [
       "_environment.js",
-      "_AdSense.js"
+      "_Footer.js"
     ]
   },
   "src/routes/aboutus/+page.svelte": {
@@ -139,7 +132,7 @@
     "isEntry": true,
     "imports": [
       "_environment.js",
-      "_AdSense.js"
+      "_Footer.js"
     ]
   },
   "src/routes/donate/+page.svelte": {
@@ -149,7 +142,7 @@
     "isEntry": true,
     "imports": [
       "_environment.js",
-      "_AdSense.js"
+      "_Footer.js"
     ]
   },
   "src/routes/gallery/+page.svelte": {
@@ -160,7 +153,7 @@
     "imports": [
       "_environment.js",
       "_client.js",
-      "_AdSense.js"
+      "_Footer.js"
     ],
     "css": [
       "_app/immutable/assets/_page.CEwX2roh.css"
@@ -173,7 +166,7 @@
     "isEntry": true,
     "imports": [
       "_environment.js",
-      "_AdSense.js"
+      "_Footer.js"
     ]
   }
 }

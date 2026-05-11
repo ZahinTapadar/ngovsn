@@ -1,7 +1,23 @@
 <script>
+    import { onMount } from 'svelte';
     import Navbar from '../../components/Navbar.svelte';
     import Footer from '../../components/Footer.svelte';
-    import AdSense from '../../components/AdSense.svelte';
+
+    onMount(() => {
+        // Reveal animations
+        import('gsap').then(({ gsap }) => {
+            gsap.utils.toArray('.reveal').forEach((el, i) => {
+                gsap.from(el, {
+                    scrollTrigger: { trigger: el, start: 'top 85%', toggleActions: 'play none none none' },
+                    y: 30,
+                    opacity: 0,
+                    duration: 0.8,
+                    delay: i * 0.05,
+                    ease: 'power2.out'
+                });
+            });
+        });
+    });
 
     let copied = false;
     function copyUPI() {
@@ -17,7 +33,7 @@
 <Navbar />
 
 <!-- Page hero -->
-<div class="bg-charcoal pt-14 pb-20">
+<div class="bg-charcoal pt-14 pb-20 reveal">
     <div class="max-w-site mx-auto px-5 lg:px-16">
         <p class="text-[10px] font-semibold tracking-[0.22em] uppercase text-sage-light mb-5">Support the Mission</p>
         <h1 class="font-display font-bold text-on-charcoal leading-[1.15]" style="font-size: clamp(2.4rem, 5vw, 4rem);">
@@ -31,7 +47,7 @@
 </div>
 
 <!-- Impact strip -->
-<div class="bg-surface-mid border-b border-ink-faint/40">
+<div class="bg-surface-mid border-b border-ink-faint/40 reveal">
     <div class="max-w-site mx-auto px-5 lg:px-16">
         <div class="grid grid-cols-3 divide-x divide-ink-faint/40">
             {#each [['500+','Animals Fed Monthly'],['100+','Active Volunteers'],['50+','Communities Reached']] as [num, label]}
@@ -45,7 +61,7 @@
 </div>
 
 <!-- Donate section -->
-<section class="py-20 lg:py-28 bg-surface">
+<section class="py-20 lg:py-28 bg-surface reveal">
     <div class="max-w-site mx-auto px-5 lg:px-16">
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
 
@@ -138,5 +154,4 @@
     </div>
 </section>
 
-<AdSense />
 <Footer />

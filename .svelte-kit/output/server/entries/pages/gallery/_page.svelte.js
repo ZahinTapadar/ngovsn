@@ -1,6 +1,6 @@
 import { J as attr, Y as escape_html, _ as stringify, l as attr_class, o as onDestroy, p as ensure_array_like } from "../../../chunks/environment.js";
 import { t as beforeNavigate } from "../../../chunks/client.js";
-import { n as Footer, r as Navbar, t as AdSense } from "../../../chunks/AdSense.js";
+import { n as Navbar, t as Footer } from "../../../chunks/Footer.js";
 //#region src/routes/gallery/+page.svelte
 function _page($$renderer, $$props) {
 	$$renderer.component(($$renderer) => {
@@ -200,7 +200,7 @@ function _page($$renderer, $$props) {
 		});
 		beforeNavigate(() => closeModal());
 		Navbar($$renderer, {});
-		$$renderer.push(`<!----> <div class="bg-surface border-b border-ink-faint/30 pt-10 pb-12"><div class="max-w-site mx-auto px-5 lg:px-16"><p class="text-[10px] font-semibold tracking-[0.22em] uppercase text-sage mb-4">Our Work</p> <h1 class="font-display font-bold text-ink leading-tight" style="font-size: clamp(2rem, 4vw, 3rem);">Gallery</h1> <p class="text-ink-variant mt-3 max-w-xl leading-relaxed">Moments of compassion captured — from daily feeding runs to community gatherings.</p></div></div> <div class="bg-surface-high"><div class="gallery-grid svelte-16h6p05"><!--[-->`);
+		$$renderer.push(`<!----> <div class="bg-surface border-b border-ink-faint/30 pt-10 pb-12 reveal"><div class="max-w-site mx-auto px-5 lg:px-16"><p class="text-[10px] font-semibold tracking-[0.22em] uppercase text-sage mb-4">Our Work</p> <h1 class="font-display font-bold text-ink leading-tight" style="font-size: clamp(2rem, 4vw, 3rem);">Gallery</h1> <p class="text-ink-variant mt-3 max-w-xl leading-relaxed">Moments of compassion captured — from daily feeding runs to community gatherings.</p></div></div> <div class="bg-surface-high reveal"><div class="gallery-grid svelte-16h6p05"><!--[-->`);
 		const each_array = ensure_array_like(galleryItems);
 		for (let $$index = 0, $$length = each_array.length; $$index < $$length; $$index++) {
 			let item = each_array[$$index];
@@ -212,8 +212,6 @@ function _page($$renderer, $$props) {
 			$$renderer.push(`<div class="fixed inset-0 bg-charcoal/95 z-50 flex items-center justify-center p-4" role="dialog" aria-modal="true" aria-labelledby="modal-title" tabindex="-1"><div class="relative max-w-5xl w-full" role="document"><button class="absolute -top-10 right-0 text-on-charcoal/60 hover:text-on-charcoal transition-colors text-[10px] tracking-[0.15em] uppercase font-semibold flex items-center gap-2" aria-label="Close"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg> Close</button> <img${attr("src", currentImage)}${attr("alt", currentTitle)} class="w-full max-h-[80vh] object-contain rounded"/> <div class="pt-4 flex items-center justify-between"><div><p id="modal-title" class="font-display font-semibold text-on-charcoal capitalize">${escape_html(currentTitle)}</p> <p class="text-[10px] tracking-[0.16em] uppercase text-on-charcoal/45 mt-0.5">${escape_html(currentCategory)}</p></div></div></div></div>`);
 		} else $$renderer.push("<!--[-1-->");
 		$$renderer.push(`<!--]--> `);
-		AdSense($$renderer, {});
-		$$renderer.push(`<!----> `);
 		Footer($$renderer, {});
 		$$renderer.push(`<!---->`);
 	});

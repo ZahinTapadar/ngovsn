@@ -3,7 +3,6 @@
     import { beforeNavigate } from '$app/navigation';
     import Navbar from '../../components/Navbar.svelte';
     import Footer from '../../components/Footer.svelte';
-    import AdSense from '../../components/AdSense.svelte';
 
     let showModal = false;
     let currentImage = '';
@@ -219,6 +218,19 @@
 
     onMount(() => {
         if (typeof window !== 'undefined') window.addEventListener('keydown', handleKeydown);
+        // Reveal animations
+        import('gsap').then(({ gsap }) => {
+            gsap.utils.toArray('.reveal').forEach((el, i) => {
+                gsap.from(el, {
+                    scrollTrigger: { trigger: el, start: 'top 85%', toggleActions: 'play none none none' },
+                    y: 30,
+                    opacity: 0,
+                    duration: 0.8,
+                    delay: i * 0.05,
+                    ease: 'power2.out'
+                });
+            });
+        });
     });
 
     onDestroy(() => {
@@ -234,7 +246,7 @@
 <Navbar />
 
 <!-- Page header -->
-<div class="bg-surface border-b border-ink-faint/30 pt-10 pb-12">
+<div class="bg-surface border-b border-ink-faint/30 pt-10 pb-12 reveal">
     <div class="max-w-site mx-auto px-5 lg:px-16">
         <p class="text-[10px] font-semibold tracking-[0.22em] uppercase text-sage mb-4">Our Work</p>
         <h1 class="font-display font-bold text-ink leading-tight" style="font-size: clamp(2rem, 4vw, 3rem);">
@@ -247,7 +259,7 @@
 </div>
 
 <!-- Masonry grid -->
-<div class="bg-surface-high">
+<div class="bg-surface-high reveal">
     <div class="gallery-grid">
         {#each galleryItems as item}
             <button
@@ -304,7 +316,6 @@
 </div>
 {/if}
 
-<AdSense />
 <Footer />
 
 <style>

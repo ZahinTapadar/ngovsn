@@ -1,7 +1,23 @@
 <script>
+    import { onMount } from 'svelte';
     import Navbar from '../../components/Navbar.svelte';
     import Footer from '../../components/Footer.svelte';
-    import AdSense from '../../components/AdSense.svelte';
+
+    onMount(() => {
+        // Reveal animations
+        import('gsap').then(({ gsap }) => {
+            gsap.utils.toArray('.reveal').forEach((el, i) => {
+                gsap.from(el, {
+                    scrollTrigger: { trigger: el, start: 'top 85%', toggleActions: 'play none none none' },
+                    y: 30,
+                    opacity: 0,
+                    duration: 0.8,
+                    delay: i * 0.05,
+                    ease: 'power2.out'
+                });
+            });
+        });
+    });
 
     const values = [
         {
@@ -25,7 +41,7 @@
 <Navbar />
 
 <!-- Page hero (text-only, editorial) -->
-<div class="bg-surface-mid border-b border-ink-faint/30 pt-12 pb-20">
+<div class="bg-surface-mid border-b border-ink-faint/30 pt-12 pb-20 reveal">
     <div class="max-w-site mx-auto px-5 lg:px-16">
         <p class="text-[10px] font-semibold tracking-[0.22em] uppercase text-sage mb-5">Who We Are</p>
         <h1 class="font-display font-bold text-ink leading-[1.15]" style="font-size: clamp(2.4rem, 5vw, 4rem);">
@@ -39,7 +55,7 @@
 </div>
 
 <!-- Story section -->
-<section class="py-24 lg:py-32 bg-surface">
+<section class="py-24 lg:py-32 bg-surface reveal">
     <div class="max-w-site mx-auto px-5 lg:px-16">
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
             <div>
@@ -62,7 +78,7 @@
 </section>
 
 <!-- Values / Mission cards -->
-<section class="py-24 lg:py-28 bg-surface-mid">
+<section class="py-24 lg:py-28 bg-surface-mid reveal">
     <div class="max-w-site mx-auto px-5 lg:px-16">
         <p class="text-[10px] font-semibold tracking-[0.22em] uppercase text-sage mb-4">What Drives Us</p>
         <h2 class="font-display font-bold text-ink mb-14" style="font-size: clamp(1.6rem, 3vw, 2.4rem);">
@@ -85,7 +101,7 @@
 </section>
 
 <!-- Photos strip -->
-<section class="py-24 lg:py-28 bg-surface">
+<section class="py-24 lg:py-28 bg-surface reveal">
     <div class="max-w-site mx-auto px-5 lg:px-16">
         <p class="text-[10px] font-semibold tracking-[0.22em] uppercase text-sage mb-4">In Action</p>
         <h2 class="font-display font-bold text-ink mb-10" style="font-size: clamp(1.6rem, 3vw, 2.4rem);">
@@ -111,7 +127,7 @@
 </section>
 
 <!-- Join CTA -->
-<section class="bg-charcoal py-20">
+<section class="bg-charcoal py-20 reveal">
     <div class="max-w-site mx-auto px-5 lg:px-16 text-center">
         <p class="text-[10px] font-semibold tracking-[0.22em] uppercase text-sage-light mb-5">Get Involved</p>
         <h2 class="font-display font-bold text-on-charcoal mb-6" style="font-size: clamp(1.6rem, 3.5vw, 2.4rem);">
@@ -130,5 +146,4 @@
     </div>
 </section>
 
-<AdSense />
 <Footer />

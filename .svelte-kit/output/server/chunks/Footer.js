@@ -70,11 +70,4 @@ function Footer($$renderer, $$props) {
 	});
 }
 //#endregion
-//#region src/components/AdSense.svelte
-function AdSense($$renderer, $$props) {
-	$$renderer.component(($$renderer) => {
-		$$renderer.push(`<div class="ad-container my-8 mx-auto max-w-4xl svelte-1qlf04p"><ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-8035401165804944" data-ad-slot="5012000553" data-ad-format="auto" data-full-width-responsive="true"></ins></div>`);
-	});
-}
-//#endregion
-export { Footer as n, Navbar as r, AdSense as t };
+export { Navbar as n, Footer as t };

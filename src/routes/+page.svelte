@@ -4,11 +4,23 @@
     import Hero from '../components/Hero.svelte';
     import Card from '../components/Card.svelte';
     import Footer from '../components/Footer.svelte';
-    import AdSense from '../components/AdSense.svelte';
     import { initAnimations } from '../lib/animations.js';
 
     onMount(() => {
         initAnimations({ excludeNavbar: true });
+        // Stagger reveal animations for sections
+        import('gsap').then(({ gsap }) => {
+            gsap.utils.toArray('.reveal').forEach((el, i) => {
+                gsap.from(el, {
+                    scrollTrigger: { trigger: el, start: 'top 85%', toggleActions: 'play none none none' },
+                    y: 30,
+                    opacity: 0,
+                    duration: 0.8,
+                    delay: i * 0.05,
+                    ease: 'power2.out'
+                });
+            });
+        });
     });
 </script>
 
@@ -21,7 +33,7 @@
 />
 
 <!-- Mission -->
-<section class="py-24 lg:py-32 bg-surface">
+<section class="py-24 lg:py-32 bg-surface reveal">
     <div class="max-w-site mx-auto px-5 lg:px-16">
         <div class="max-w-3xl">
             <p class="text-[10px] font-semibold tracking-[0.22em] uppercase text-sage mb-5">Our Purpose</p>
@@ -49,7 +61,7 @@
 </section>
 
 <!-- Stats bar -->
-<div class="bg-surface-mid border-y border-ink-faint/40">
+<div class="bg-surface-mid border-y border-ink-faint/40 reveal">
     <div class="max-w-site mx-auto px-5 lg:px-16">
         <div class="grid grid-cols-3 divide-x divide-ink-faint/40">
             {#each [['500+','Animals Fed Monthly'],['100+','Active Volunteers'],['50+','Communities Reached']] as [num, label]}
@@ -63,7 +75,7 @@
 </div>
 
 <!-- Initiatives -->
-<section class="py-24 lg:py-32 bg-surface">
+<section class="py-24 lg:py-32 bg-surface reveal">
     <div class="max-w-site mx-auto px-5 lg:px-16">
         <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-14">
             <div>
@@ -104,7 +116,7 @@
 </section>
 
 <!-- Dark CTA strip -->
-<section class="bg-charcoal py-20">
+<section class="bg-charcoal py-20 reveal">
     <div class="max-w-site mx-auto px-5 lg:px-16 text-center">
         <p class="text-[10px] font-semibold tracking-[0.22em] uppercase text-sage-light mb-5">Make a Difference</p>
         <h2 class="font-display font-bold text-on-charcoal leading-snug mb-6"
@@ -127,6 +139,5 @@
     </div>
 </section>
 
-<AdSense />
 <Footer />
   
