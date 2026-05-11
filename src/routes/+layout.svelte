@@ -2,9 +2,7 @@
 	import '../app.css';
 	import { page } from '$app/stores';
 	import { onMount } from 'svelte';
-	import { trackPageView } from '$lib/analytics';
 
-	let currentPath = '';
 	let isScrolled = false;
 	let isLoading = false;
 
@@ -25,12 +23,6 @@
 			}
 		};
 	});
-
-	// Track page changes
-	$: if ($page && $page.url.pathname !== currentPath && currentPath !== '') {
-		currentPath = $page.url.pathname;
-		trackPageView(currentPath);
-	}
 
 	// Handle loading state
 	$: if ($page) {

@@ -1,44 +1,80 @@
-import { c as create_ssr_component, d as subscribe, g as each, e as escape, f as add_attribute } from "./ssr.js";
-import { n as navigating } from "./stores.js";
-import "./firebase.js";
-import "firebase/analytics";
-const css$1 = {
-  code: ".hamburger-menu.svelte-dv1kz0{cursor:pointer}",
-  map: `{"version":3,"file":"Navbar.svelte","sources":["Navbar.svelte"],"sourcesContent":["<script>\\n    import { navigating } from '$app/stores';\\n    \\n    let isMenuOpen = false;\\n    \\n    function toggleMenu() {\\n        isMenuOpen = !isMenuOpen;\\n    }\\n\\n    // Close menu when navigation starts\\n    $: if ($navigating) {\\n        isMenuOpen = false;\\n    }\\n<\/script>\\n\\n<nav class=\\"bg-white/90 backdrop-blur-md shadow-sm fixed w-full top-0 z-50\\">\\n    <div class=\\"container mx-auto px-4\\">\\n        <div class=\\"flex items-center justify-between h-20\\">\\n            <a href=\\"/\\" class=\\"nav-logo flex items-center space-x-2\\">\\n                <img src=\\"/img/logo.jpeg\\" alt=\\"VSN Logo\\" class=\\"w-10 h-10 rounded-full object-cover\\" />\\n                <span class=\\"text-xl font-bold text-gray-800 hover:text-green-600 transition-colors duration-300\\">VSN</span>\\n            </a>\\n            \\n            <!-- Desktop Menu -->\\n            <div class=\\"hidden md:flex items-center space-x-8\\">\\n                <div class=\\"nav-links flex items-center space-x-8\\">\\n                    <a href=\\"/\\" class=\\"nav-link text-gray-700 hover:text-green-600 transition-colors duration-300\\">Home</a>\\n                    <a href=\\"/gallery\\" class=\\"nav-link text-gray-700 hover:text-green-600 transition-colors duration-300\\">Gallery</a>\\n                    <a href=\\"/aboutus\\" class=\\"nav-link text-gray-700 hover:text-green-600 transition-colors duration-300\\">About</a>\\n                    <a href=\\"/volunteer\\" class=\\"nav-link text-gray-700 hover:text-green-600 transition-colors duration-300\\">Contact</a>\\n                </div>\\n                <a href=\\"/donate\\" \\n                   class=\\"nav-cta bg-green-500 text-white px-6 py-2.5 rounded-full hover:bg-green-600 transition-all duration-300 transform hover:scale-105\\">\\n                    Donate\\n                </a>\\n            </div>\\n            \\n            <!-- Mobile Menu Button -->\\n            <button \\n                class=\\"nav-toggle md:hidden text-gray-700 hover:text-green-600 transition-colors duration-300 z-50\\"\\n                on:click={toggleMenu}\\n            >\\n                <div class=\\"hamburger-menu relative w-6 h-6\\">\\n                    <span class=\\"hamburger-line absolute w-6 h-0.5 bg-current transform transition-all duration-300 {isMenuOpen ? 'rotate-45 top-3' : 'top-1'}\\"></span>\\n                    <span class=\\"hamburger-line absolute w-6 h-0.5 bg-current transform transition-all duration-300 top-3 {isMenuOpen ? 'opacity-0' : 'opacity-100'}\\"></span>\\n                    <span class=\\"hamburger-line absolute w-6 h-0.5 bg-current transform transition-all duration-300 {isMenuOpen ? '-rotate-45 top-3' : 'top-5'}\\"></span>\\n                </div>\\n            </button>\\n        </div>\\n    </div>\\n</nav>\\n\\n<!-- Full Screen Mobile Menu -->\\n{#if isMenuOpen}\\n<div class=\\"mobile-menu fixed inset-0 bg-white/90 backdrop-blur-lg z-40 md:hidden\\">\\n    <div class=\\"container mx-auto px-4 h-screen flex flex-col items-center justify-center\\">\\n        <div class=\\"mobile-nav-links space-y-8 text-center\\">\\n            {#each ['Home', 'Gallery', 'About', 'Contact'] as link}\\n                <div>\\n                    <a \\n                        href={link === 'Home' ? '/' : link === 'About' ? '/aboutus':link === 'Contact' ? '/volunteer' : \`/\${link.toLowerCase()}\`}\\n                        class=\\"mobile-nav-link block text-3xl font-bold text-gray-800 hover:text-green-600 transition-colors duration-300\\"\\n                        on:click={() => isMenuOpen = false}\\n                    >\\n                        {link}\\n                    </a>\\n                </div>\\n            {/each}\\n            <div>\\n                <a \\n                    href=\\"/donate\\" \\n                    class=\\"mobile-nav-cta inline-block bg-green-500 text-white px-8 py-3 rounded-full hover:bg-green-600 transition-all duration-300 transform hover:scale-105 text-2xl mt-8\\"\\n                    on:click={() => isMenuOpen = false}\\n                >\\n                    Donate\\n                </a>\\n            </div>\\n        </div>\\n    </div>\\n</div>\\n{/if}\\n\\n<!-- Add padding to account for fixed navbar -->\\n<div class=\\"h-20\\"></div>\\n\\n<style>\\n    .hamburger-menu {\\n        cursor: pointer;\\n    }\\n</style>\\n  "],"names":[],"mappings":"AAsFI,6BAAgB,CACZ,MAAM,CAAE,OACZ"}`
-};
-const Navbar = create_ssr_component(($$result, $$props, $$bindings, slots) => {
-  let $navigating, $$unsubscribe_navigating;
-  $$unsubscribe_navigating = subscribe(navigating, (value) => $navigating = value);
-  let isMenuOpen = false;
-  $$result.css.add(css$1);
-  {
-    if ($navigating) {
-      isMenuOpen = false;
-    }
-  }
-  $$unsubscribe_navigating();
-  return `<nav class="bg-white/90 backdrop-blur-md shadow-sm fixed w-full top-0 z-50"><div class="container mx-auto px-4"><div class="flex items-center justify-between h-20"><a href="/" class="nav-logo flex items-center space-x-2" data-svelte-h="svelte-1p5rcvx"><img src="/img/logo.jpeg" alt="VSN Logo" class="w-10 h-10 rounded-full object-cover"> <span class="text-xl font-bold text-gray-800 hover:text-green-600 transition-colors duration-300">VSN</span></a>  <div class="hidden md:flex items-center space-x-8" data-svelte-h="svelte-1ktxq8k"><div class="nav-links flex items-center space-x-8"><a href="/" class="nav-link text-gray-700 hover:text-green-600 transition-colors duration-300">Home</a> <a href="/gallery" class="nav-link text-gray-700 hover:text-green-600 transition-colors duration-300">Gallery</a> <a href="/aboutus" class="nav-link text-gray-700 hover:text-green-600 transition-colors duration-300">About</a> <a href="/volunteer" class="nav-link text-gray-700 hover:text-green-600 transition-colors duration-300">Contact</a></div> <a href="/donate" class="nav-cta bg-green-500 text-white px-6 py-2.5 rounded-full hover:bg-green-600 transition-all duration-300 transform hover:scale-105">Donate</a></div>  <button class="nav-toggle md:hidden text-gray-700 hover:text-green-600 transition-colors duration-300 z-50"><div class="hamburger-menu relative w-6 h-6 svelte-dv1kz0"><span class="${"hamburger-line absolute w-6 h-0.5 bg-current transform transition-all duration-300 " + escape(isMenuOpen ? "rotate-45 top-3" : "top-1", true)}"></span> <span class="${"hamburger-line absolute w-6 h-0.5 bg-current transform transition-all duration-300 top-3 " + escape(isMenuOpen ? "opacity-0" : "opacity-100", true)}"></span> <span class="${"hamburger-line absolute w-6 h-0.5 bg-current transform transition-all duration-300 " + escape(isMenuOpen ? "-rotate-45 top-3" : "top-5", true)}"></span></div></button></div></div></nav>  ${isMenuOpen ? `<div class="mobile-menu fixed inset-0 bg-white/90 backdrop-blur-lg z-40 md:hidden"><div class="container mx-auto px-4 h-screen flex flex-col items-center justify-center"><div class="mobile-nav-links space-y-8 text-center">${each(["Home", "Gallery", "About", "Contact"], (link) => {
-    return `<div><a${add_attribute(
-      "href",
-      link === "Home" ? "/" : link === "About" ? "/aboutus" : link === "Contact" ? "/volunteer" : `/${link.toLowerCase()}`,
-      0
-    )} class="mobile-nav-link block text-3xl font-bold text-gray-800 hover:text-green-600 transition-colors duration-300">${escape(link)}</a> </div>`;
-  })} <div><a href="/donate" class="mobile-nav-cta inline-block bg-green-500 text-white px-8 py-3 rounded-full hover:bg-green-600 transition-all duration-300 transform hover:scale-105 text-2xl mt-8" data-svelte-h="svelte-16e34rw">Donate</a></div></div></div></div>` : ``}  <div class="h-20"></div>`;
-});
-const Footer = create_ssr_component(($$result, $$props, $$bindings, slots) => {
-  return `<footer class="bg-gray-900 text-gray-300 py-12"><div class="container mx-auto px-4"><div class="grid grid-cols-1 md:grid-cols-4 gap-8"> <div class="space-y-4"><h2 class="text-2xl font-bold text-white" data-svelte-h="svelte-1mqz1a2">Voice of Strays and Nature</h2> <p class="text-gray-400 leading-relaxed" data-svelte-h="svelte-16lq72p">Empowering stray animals through care, compassion, and community support.</p> <div class="flex space-x-4"><button class="text-gray-400 hover:text-white transition-colors duration-300" aria-label="Visit our Facebook page" data-svelte-h="svelte-15d61l6"><svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"></path></svg></button> <button class="text-gray-400 hover:text-white transition-colors duration-300" aria-label="Visit our Twitter page" data-svelte-h="svelte-b4svvx"><svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"></path></svg></button> <button class="text-gray-400 hover:text-white transition-colors duration-300" aria-label="Visit our Instagram page" data-svelte-h="svelte-ygrnpo"><svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C8.74 0 8.333.015 7.053.072 5.775.132 3.01.367 3.01 2.72v18.56c0 2.354 2.766 2.588 4.043 2.648 1.28.06 1.686.072 4.947.072 3.26 0 3.667-.012 4.947-.072 1.28-.06 4.043-.294 4.043-2.648V2.72c0-2.353-2.766-2.588-4.043-2.648C15.667.015 15.26 0 12 0zm0 2.16c3.203 0 3.585.016 4.85.071 1.17.055 1.805.249 2.227.415.562.217.96.477 1.382.896.419.42.679.819.896 1.381.164.422.36 1.057.413 2.227.057 1.266.07 1.646.07 4.85s-.013 3.585-.07 4.85c-.055 1.17-.25 1.805-.415 2.227-.224.562-.479.96-.896 1.382-.419.419-.824.679-1.38.896-.42.164-1.065.36-2.235.413-1.274.057-1.649.07-4.859.07-3.211 0-3.586-.013-4.859-.07-1.171-.055-1.816-.25-2.236-.415-.569-.224-.96-.479-1.379-.896-.421-.419-.69-.824-.9-1.38-.165-.42-.359-1.065-.413-2.235-.057-1.274-.07-1.649-.07-4.844 0-3.196.013-3.586.07-4.861.055-1.17.255-1.814.42-2.234.21-.57.479-.96.9-1.381.419-.419.81-.689 1.379-.898.42-.166 1.051-.361 2.221-.413 1.275-.045 1.65-.06 4.859-.06l.045.03zm0 3.678c-3.405 0-6.162 2.76-6.162 6.162 0 3.405 2.76 6.162 6.162 6.162 3.405 0 6.162-2.76 6.162-6.162 0-3.405-2.76-6.162-6.162-6.162zM12 16c-2.21 0-4-1.79-4-4s1.79-4 4-4 4 1.79 4 4-1.79 4-4 4zm7.846-10.405c0 .795-.646 1.44-1.44 1.44-.795 0-1.44-.646-1.44-1.44 0-.794.646-1.439 1.44-1.439.793-.001 1.44.645 1.44 1.439z"></path></svg></button></div></div>  <div data-svelte-h="svelte-o2et4e"><h3 class="text-lg font-semibold text-white mb-4">Quick Links</h3> <ul class="space-y-2"><li><a href="/aboutus" class="text-gray-400 hover:text-white transition-colors duration-300">About Us</a></li> <li><a href="/gallery" class="text-gray-400 hover:text-white transition-colors duration-300">Our Projects</a></li> <li><a href="/volunteer" class="text-gray-400 hover:text-white transition-colors duration-300">Volunteer</a></li> <li><a href="/donate" class="text-gray-400 hover:text-white transition-colors duration-300">Donate</a></li></ul></div>  <div data-svelte-h="svelte-1i4c1hj"><h3 class="text-lg font-semibold text-white mb-4">Contact Us</h3> <ul class="space-y-2"><li class="flex items-center space-x-2"><svg class="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg> <span class="text-gray-400">vsnghy.org@gmail.com</span></li> <li class="flex items-center space-x-2"><svg class="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path></svg> <span class="text-gray-400">+919365582550</span></li></ul></div> </div> <div class="border-t border-gray-800 mt-8 pt-8 text-center text-gray-500"><p class="mb-2">© ${escape((/* @__PURE__ */ new Date()).getFullYear())} Voice of Strays and Nature. All rights reserved.</p> <p class="text-sm flex items-center justify-center gap-2" data-svelte-h="svelte-1c6buow">Made with <span class="text-red-500">❤️</span> by 
-                <a href="https://github.com/falkon2" class="text-gray-400 hover:text-white transition-colors duration-300 underline">@Zahin Tapadar</a></p></div></div></footer>`;
-});
-const css = {
-  code: ".ad-container.svelte-cliyrb{min-height:90px;background-color:#f3f4f6;border-radius:0.5rem;padding:1rem}",
-  map: `{"version":3,"file":"AdSense.svelte","sources":["AdSense.svelte"],"sourcesContent":["<script>\\n  import { onMount } from 'svelte';\\n  import { browser } from '$app/environment';\\n\\n  onMount(() => {\\n    if (browser) {\\n      // Load AdSense script\\n      const script = document.createElement('script');\\n      script.src = 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8035401165804944';\\n      script.async = true;\\n      script.crossOrigin = 'anonymous';\\n      document.head.appendChild(script);\\n    }\\n  });\\n<\/script>\\n\\n<!-- AdSense Ad Unit -->\\n<div class=\\"ad-container my-8 mx-auto max-w-4xl\\">\\n  <ins class=\\"adsbygoogle\\"\\n       style=\\"display:block\\"\\n       data-ad-client=\\"ca-pub-8035401165804944\\"\\n       data-ad-slot=\\"5012000553\\"\\n       data-ad-format=\\"auto\\"\\n       data-full-width-responsive=\\"true\\"></ins>\\n</div>\\n\\n<style>\\n  .ad-container {\\n    min-height: 90px; /* Minimum height for ad units */\\n    background-color: #f3f4f6; /* Light gray background while ad loads */\\n    border-radius: 0.5rem;\\n    padding: 1rem;\\n  }\\n</style> "],"names":[],"mappings":"AA2BE,2BAAc,CACZ,UAAU,CAAE,IAAI,CAChB,gBAAgB,CAAE,OAAO,CACzB,aAAa,CAAE,MAAM,CACrB,OAAO,CAAE,IACX"}`
-};
-const AdSense = create_ssr_component(($$result, $$props, $$bindings, slots) => {
-  $$result.css.add(css);
-  return ` <div class="ad-container my-8 mx-auto max-w-4xl svelte-cliyrb" data-svelte-h="svelte-k6mj2g"><ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-8035401165804944" data-ad-slot="5012000553" data-ad-format="auto" data-full-width-responsive="true"></ins> </div>`;
-});
-export {
-  AdSense as A,
-  Footer as F,
-  Navbar as N
-};
+import { J as attr, Y as escape_html, _ as stringify, g as store_get, l as attr_class, p as ensure_array_like, u as attr_style, v as unsubscribe_stores } from "./environment.js";
+import { n as page, t as navigating } from "./stores.js";
+//#region src/components/Navbar.svelte
+function Navbar($$renderer, $$props) {
+	$$renderer.component(($$renderer) => {
+		var $$store_subs;
+		let isOnHeroPage, isTransparent;
+		let isMenuOpen = false;
+		let isScrolled = false;
+		if (typeof window !== "undefined") window.addEventListener("scroll", () => {
+			isScrolled = window.scrollY > 30;
+		}, { passive: true });
+		const navLinks = [
+			["Home", "/"],
+			["Gallery", "/gallery"],
+			["About", "/aboutus"],
+			["Contact", "/volunteer"]
+		];
+		$: if (store_get($$store_subs ??= {}, "$navigating", navigating)) {
+			isMenuOpen = false;
+			if (typeof document !== "undefined") document.body.style.overflow = "";
+		}
+		$: isOnHeroPage = store_get($$store_subs ??= {}, "$page", page)?.url?.pathname === "/";
+		$: isTransparent = isOnHeroPage && !isScrolled;
+		$$renderer.push(`<nav${attr_class(`fixed w-full top-0 z-50 transition-all duration-500 ${stringify(isTransparent ? "bg-transparent" : "bg-surface/95 backdrop-blur-sm")}`)}${attr_style(isTransparent ? "" : "box-shadow: 0 1px 0 0 #CEC5BD;")}><div class="max-w-site mx-auto px-5 lg:px-16"><div class="flex items-center justify-between h-[72px]"><a href="/" class="flex items-center gap-3 group"><img src="/img/logo.jpeg" alt="VSN" class="w-9 h-9 rounded-full object-cover flex-shrink-0"/> <div class="leading-none"><span${attr_class(`block font-display font-semibold text-[17px] ${stringify(isTransparent ? "text-white" : "text-ink")}`)}>VSN</span> <span${attr_class(`block text-[9px] tracking-[0.18em] uppercase mt-0.5 ${stringify(isTransparent ? "text-white/60" : "text-ink-subtle")}`)}>Voice of Strays</span></div></a> <div class="hidden md:flex items-center gap-10"><!--[-->`);
+		const each_array = ensure_array_like(navLinks);
+		for (let $$index = 0, $$length = each_array.length; $$index < $$length; $$index++) {
+			let [label, href] = each_array[$$index];
+			$$renderer.push(`<a${attr("href", href)}${attr_class(`text-[11px] font-semibold tracking-[0.14em] uppercase transition-colors duration-200 ${stringify(isTransparent ? "text-white/80 hover:text-white" : "text-ink-variant hover:text-sage")}`)}>${escape_html(label)}</a>`);
+		}
+		$$renderer.push(`<!--]--></div> <div class="flex items-center gap-4"><a href="/donate" class="hidden md:inline-block bg-sage hover:bg-forest text-white text-[11px] font-semibold tracking-[0.12em] uppercase px-6 py-2.5 rounded transition-colors duration-200">Donate</a> <button${attr_class(`md:hidden p-1.5 rounded ${stringify(isTransparent ? "text-white" : "text-ink")} transition-colors`)} aria-label="Toggle menu">`);
+		if (isMenuOpen) {
+			$$renderer.push("<!--[0-->");
+			$$renderer.push(`<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>`);
+		} else {
+			$$renderer.push("<!--[-1-->");
+			$$renderer.push(`<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 6h16M4 12h16M4 18h16"></path></svg>`);
+		}
+		$$renderer.push(`<!--]--></button></div></div></div></nav> `);
+		if (isMenuOpen) {
+			$$renderer.push("<!--[0-->");
+			$$renderer.push(`<div class="fixed inset-0 bg-charcoal z-40 flex flex-col items-center justify-center md:hidden"><nav class="flex flex-col items-center gap-7 text-center"><!--[-->`);
+			const each_array_1 = ensure_array_like(navLinks);
+			for (let $$index_1 = 0, $$length = each_array_1.length; $$index_1 < $$length; $$index_1++) {
+				let [label, href] = each_array_1[$$index_1];
+				$$renderer.push(`<a${attr("href", href)} class="font-display italic text-4xl text-on-charcoal/90 hover:text-on-charcoal transition-colors duration-200">${escape_html(label)}</a>`);
+			}
+			$$renderer.push(`<!--]--> <a href="/donate" class="mt-5 bg-sage hover:bg-forest text-white text-xs font-semibold tracking-[0.15em] uppercase px-10 py-3 rounded transition-colors duration-200">Donate Now</a></nav> <p class="absolute bottom-8 text-[9px] tracking-[0.22em] uppercase text-on-charcoal/30">Voice of Strays &amp; Nature</p></div>`);
+		} else $$renderer.push("<!--[-1-->");
+		$$renderer.push(`<!--]--> <div class="h-[72px]"></div>`);
+		if ($$store_subs) unsubscribe_stores($$store_subs);
+	});
+}
+//#endregion
+//#region src/components/Footer.svelte
+function Footer($$renderer, $$props) {
+	$$renderer.component(($$renderer) => {
+		$$renderer.push(`<footer class="bg-charcoal text-on-charcoal/70 pt-16 pb-8"><div class="max-w-site mx-auto px-5 lg:px-16"><div class="grid grid-cols-1 md:grid-cols-3 gap-12 pb-12 border-b border-on-charcoal/10"><div class="space-y-4"><div class="flex items-center gap-3"><img src="/img/logo.jpeg" alt="VSN" class="w-8 h-8 rounded-full object-cover opacity-80"/> <span class="font-display font-semibold text-lg text-on-charcoal">VSN</span></div> <p class="text-sm leading-relaxed text-on-charcoal/50 max-w-xs">Giving a voice to the voiceless — empowering stray animals through compassionate community action.</p> <a href="https://www.instagram.com/vsnghy/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 text-[10px] tracking-[0.16em] uppercase text-sage-light hover:text-forest-light transition-colors duration-200" aria-label="Instagram"><svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"></path></svg> @vsnghy</a></div> <div><h3 class="text-[10px] font-semibold tracking-[0.2em] uppercase text-on-charcoal/40 mb-5">Navigate</h3> <ul class="space-y-3"><!--[-->`);
+		const each_array = ensure_array_like([
+			["About Us", "/aboutus"],
+			["Gallery", "/gallery"],
+			["Volunteer", "/volunteer"],
+			["Donate", "/donate"]
+		]);
+		for (let $$index = 0, $$length = each_array.length; $$index < $$length; $$index++) {
+			let [label, href] = each_array[$$index];
+			$$renderer.push(`<li><a${attr("href", href)} class="text-sm text-on-charcoal/60 hover:text-on-charcoal transition-colors duration-200">${escape_html(label)}</a></li>`);
+		}
+		$$renderer.push(`<!--]--></ul></div> <div><h3 class="text-[10px] font-semibold tracking-[0.2em] uppercase text-on-charcoal/40 mb-5">Contact</h3> <ul class="space-y-3 text-sm text-on-charcoal/60"><li><a href="mailto:vsnghy.org@gmail.com" class="hover:text-on-charcoal transition-colors duration-200">vsnghy.org@gmail.com</a></li> <li><a href="tel:+919365582550" class="hover:text-on-charcoal transition-colors duration-200">+91 93655 82550</a></li></ul> <div class="mt-8"><a href="/donate" class="inline-block bg-sage hover:bg-forest text-white text-[10px] font-semibold tracking-[0.15em] uppercase px-6 py-2.5 rounded transition-colors duration-200">Support Us</a></div></div></div> <div class="flex flex-col sm:flex-row items-center justify-between gap-3 pt-7 text-[11px] text-on-charcoal/30"><p>© ${escape_html((/* @__PURE__ */ new Date()).getFullYear())} Voice of Strays and Nature. All rights reserved.</p> <p>Made with care by <a href="https://zahintapadar.me" target="_blank" rel="noopener noreferrer" class="text-on-charcoal/50 hover:text-on-charcoal transition-colors duration-200 ml-1">@Zahin Tapadar</a></p></div></div></footer>`);
+	});
+}
+//#endregion
+//#region src/components/AdSense.svelte
+function AdSense($$renderer, $$props) {
+	$$renderer.component(($$renderer) => {
+		$$renderer.push(`<div class="ad-container my-8 mx-auto max-w-4xl svelte-1qlf04p"><ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-8035401165804944" data-ad-slot="5012000553" data-ad-format="auto" data-full-width-responsive="true"></ins></div>`);
+	});
+}
+//#endregion
+export { Footer as n, Navbar as r, AdSense as t };

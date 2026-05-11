@@ -1,56 +1,46 @@
-import { o as onMount, h as getContext } from "./ssr.js";
-import "./exports.js";
-function get(key, parse = JSON.parse) {
-  try {
-    return parse(sessionStorage[key]);
-  } catch {
-  }
-}
-const SNAPSHOT_KEY = "sveltekit:snapshot";
-const SCROLL_KEY = "sveltekit:scroll";
-const is_legacy = onMount.toString().includes("$$") || /function \w+\(\) \{\}/.test(onMount.toString());
-if (is_legacy) {
-  ({
-    data: {},
-    form: null,
-    error: null,
-    params: {},
-    route: { id: null },
-    state: {},
-    status: -1,
-    url: new URL("https://example.com")
-  });
-}
-get(SCROLL_KEY) ?? {};
-get(SNAPSHOT_KEY) ?? {};
-const getStores = () => {
-  const stores = getContext("__svelte__");
-  return {
-    /** @type {typeof page} */
-    page: {
-      subscribe: stores.page.subscribe
-    },
-    /** @type {typeof navigating} */
-    navigating: {
-      subscribe: stores.navigating.subscribe
-    },
-    /** @type {typeof updated} */
-    updated: stores.updated
-  };
+import { at as getContext } from "./environment.js";
+import "./client.js";
+//#region node_modules/.pnpm/@sveltejs+kit@2.59.1_@sveltejs+vite-plugin-svelte@7.1.2_svelte@5.55.5_@typescript-eslin_0361574e43d5606b9eab47bdc91fdfc9/node_modules/@sveltejs/kit/src/runtime/app/stores.js
+/**
+* A function that returns all of the contextual stores. On the server, this must be called during component initialization.
+* Only use this if you need to defer store subscription until after the component has mounted, for some reason.
+*
+* @deprecated Use `$app/state` instead (requires Svelte 5, [see docs for more info](https://svelte.dev/docs/kit/migrating-to-sveltekit-2#SvelteKit-2.12:-$app-stores-deprecated))
+*/
+var getStores = () => {
+	const stores$1 = getContext("__svelte__");
+	return {
+		/** @type {typeof page} */
+		page: { subscribe: stores$1.page.subscribe },
+		/** @type {typeof navigating} */
+		navigating: { subscribe: stores$1.navigating.subscribe },
+		/** @type {typeof updated} */
+		updated: stores$1.updated
+	};
 };
-const page = {
-  subscribe(fn) {
-    const store = getStores().page;
-    return store.subscribe(fn);
-  }
-};
-const navigating = {
-  subscribe(fn) {
-    const store = getStores().navigating;
-    return store.subscribe(fn);
-  }
-};
-export {
-  navigating as n,
-  page as p
-};
+/**
+* A readable store whose value contains page data.
+*
+* On the server, this store can only be subscribed to during component initialization. In the browser, it can be subscribed to at any time.
+*
+* @deprecated Use `page` from `$app/state` instead (requires Svelte 5, [see docs for more info](https://svelte.dev/docs/kit/migrating-to-sveltekit-2#SvelteKit-2.12:-$app-stores-deprecated))
+* @type {import('svelte/store').Readable<import('@sveltejs/kit').Page>}
+*/
+var page = { subscribe(fn) {
+	return getStores().page.subscribe(fn);
+} };
+/**
+* A readable store.
+* When navigating starts, its value is a `Navigation` object with `from`, `to`, `type` and (if `type === 'popstate'`) `delta` properties.
+* When navigating finishes, its value reverts to `null`.
+*
+* On the server, this store can only be subscribed to during component initialization. In the browser, it can be subscribed to at any time.
+*
+* @deprecated Use `navigating` from `$app/state` instead (requires Svelte 5, [see docs for more info](https://svelte.dev/docs/kit/migrating-to-sveltekit-2#SvelteKit-2.12:-$app-stores-deprecated))
+* @type {import('svelte/store').Readable<import('@sveltejs/kit').Navigation | null>}
+*/
+var navigating = { subscribe(fn) {
+	return getStores().navigating.subscribe(fn);
+} };
+//#endregion
+export { page as n, navigating as t };

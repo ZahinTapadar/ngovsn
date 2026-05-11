@@ -1,7 +1,3 @@
-<script>
-    import { trackSocialMedia } from '$lib/analytics';
-</script>
-
 <footer class="bg-charcoal text-on-charcoal/70 pt-16 pb-8">
     <div class="max-w-site mx-auto px-5 lg:px-16">
 
@@ -22,7 +18,6 @@
                     target="_blank"
                     rel="noopener noreferrer"
                     class="inline-flex items-center gap-2 text-[10px] tracking-[0.16em] uppercase text-sage-light hover:text-forest-light transition-colors duration-200"
-                    on:click={() => trackSocialMedia('instagram')}
                     aria-label="Instagram"
                 >
                     <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">

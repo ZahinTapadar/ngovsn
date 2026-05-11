@@ -1,14 +1,7 @@
 <script>
-    import { onMount } from 'svelte';
-    import { trackPageView, trackDonation } from '$lib/analytics';
     import Navbar from '../../components/Navbar.svelte';
     import Footer from '../../components/Footer.svelte';
     import AdSense from '../../components/AdSense.svelte';
-
-    onMount(() => {
-        trackPageView('donate');
-        trackDonation(0, 'test');
-    });
 
     let copied = false;
     function copyUPI() {
