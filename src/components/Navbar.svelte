@@ -67,34 +67,23 @@
                     Donate
                 </a>
                 <button
-                    class="md:hidden p-1.5 rounded {isTransparent ? 'text-white' : 'text-ink'} transition-colors relative w-8 h-8"
+                    class="md:hidden p-1.5 rounded {isTransparent ? 'text-white' : 'text-ink'} transition-colors relative w-8 h-8 flex items-center justify-center"
                     on:click={toggleMenu}
                     aria-label="Toggle menu"
                 >
-                    <div class="absolute inset-0 flex items-center justify-center">
-                        {#if isMenuOpen}
-                            <svg 
-                                class="w-5 h-5" 
-                                fill="none" 
-                                stroke="currentColor" 
-                                viewBox="0 0 24 24"
-                                in:scale={{ duration: 300, easing: backOut, start: 0.5 }}
-                                out:fade={{ duration: 150 }}
-                            >
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
-                            </svg>
-                        {:else}
-                            <svg 
-                                class="w-5 h-5" 
-                                fill="none" 
-                                stroke="currentColor" 
-                                viewBox="0 0 24 24"
-                                in:scale={{ duration: 300, easing: backOut, start: 0.5 }}
-                                out:fade={{ duration: 150 }}
-                            >
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 6h16M4 12h16M4 18h16"/>
-                            </svg>
-                        {/if}
+                    <div class="relative w-5 h-4 flex flex-col justify-between items-center">
+                        <!-- Top bar -->
+                        <span 
+                            class="block w-5 h-0.5 bg-current rounded-full transition-all duration-300 ease-out origin-center"
+                            class:translate-y-[7px]={isMenuOpen}
+                            class:rotate-45={isMenuOpen}
+                        ></span>
+                        <!-- Bottom bar -->
+                        <span 
+                            class="block w-5 h-0.5 bg-current rounded-full transition-all duration-300 ease-out origin-center"
+                            class:-translate-y-[7px]={isMenuOpen}
+                            class:-rotate-45={isMenuOpen}
+                        ></span>
                     </div>
                 </button>
             </div>

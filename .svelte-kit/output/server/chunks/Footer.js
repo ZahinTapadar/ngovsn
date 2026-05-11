@@ -28,15 +28,13 @@ function Navbar($$renderer, $$props) {
 			let [label, href] = each_array[$$index];
 			$$renderer.push(`<a${attr("href", href)}${attr_class(`text-[11px] font-semibold tracking-[0.14em] uppercase transition-colors duration-200 ${stringify(isTransparent ? "text-white/80 hover:text-white" : "text-ink-variant hover:text-sage")}`)}>${escape_html(label)}</a>`);
 		}
-		$$renderer.push(`<!--]--></div> <div class="flex items-center gap-4"><a href="/donate" class="hidden md:inline-block bg-sage hover:bg-forest text-white text-[11px] font-semibold tracking-[0.12em] uppercase px-6 py-2.5 rounded transition-colors duration-200">Donate</a> <button${attr_class(`md:hidden p-1.5 rounded ${stringify(isTransparent ? "text-white" : "text-ink")} transition-colors relative w-8 h-8`)} aria-label="Toggle menu"><div class="absolute inset-0 flex items-center justify-center">`);
-		if (isMenuOpen) {
-			$$renderer.push("<!--[0-->");
-			$$renderer.push(`<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>`);
-		} else {
-			$$renderer.push("<!--[-1-->");
-			$$renderer.push(`<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 6h16M4 12h16M4 18h16"></path></svg>`);
-		}
-		$$renderer.push(`<!--]--></div></button></div></div></div></nav> `);
+		$$renderer.push(`<!--]--></div> <div class="flex items-center gap-4"><a href="/donate" class="hidden md:inline-block bg-sage hover:bg-forest text-white text-[11px] font-semibold tracking-[0.12em] uppercase px-6 py-2.5 rounded transition-colors duration-200">Donate</a> <button${attr_class(`md:hidden p-1.5 rounded ${stringify(isTransparent ? "text-white" : "text-ink")} transition-colors relative w-8 h-8 flex items-center justify-center`)} aria-label="Toggle menu"><div class="relative w-5 h-4 flex flex-col justify-between items-center"><span${attr_class("block w-5 h-0.5 bg-current rounded-full transition-all duration-300 ease-out origin-center", void 0, {
+			"translate-y-[7px]": isMenuOpen,
+			"rotate-45": isMenuOpen
+		})}></span> <span${attr_class("block w-5 h-0.5 bg-current rounded-full transition-all duration-300 ease-out origin-center", void 0, {
+			"-translate-y-[7px]": isMenuOpen,
+			"-rotate-45": isMenuOpen
+		})}></span></div></button></div></div></div></nav> `);
 		if (isMenuOpen) {
 			$$renderer.push("<!--[0-->");
 			$$renderer.push(`<div class="fixed inset-0 bg-charcoal z-40 flex flex-col items-center justify-center md:hidden"><nav class="flex flex-col items-center gap-7 text-center"><!--[-->`);
@@ -66,7 +64,7 @@ function Footer($$renderer, $$props) {
 			let [label, href] = each_array[$$index];
 			$$renderer.push(`<li><a${attr("href", href)} class="text-sm text-on-charcoal/60 hover:text-on-charcoal transition-colors duration-200">${escape_html(label)}</a></li>`);
 		}
-		$$renderer.push(`<!--]--></ul></div> <div><h3 class="text-[10px] font-semibold tracking-[0.2em] uppercase text-on-charcoal/40 mb-5">Contact</h3> <ul class="space-y-3 text-sm text-on-charcoal/60"><li><a href="mailto:vsnghy.org@gmail.com" class="hover:text-on-charcoal transition-colors duration-200">vsnghy.org@gmail.com</a></li> <li><a href="tel:+919365582550" class="hover:text-on-charcoal transition-colors duration-200">+91 93655 82550</a></li></ul> <div class="mt-8"><a href="/donate" class="inline-block bg-sage hover:bg-forest text-white text-[10px] font-semibold tracking-[0.15em] uppercase px-6 py-2.5 rounded transition-colors duration-200">Support Us</a></div></div></div> <div class="flex flex-col sm:flex-row items-center justify-between gap-3 pt-7 text-[11px] text-on-charcoal/30"><p>© ${escape_html((/* @__PURE__ */ new Date()).getFullYear())} Voice of Strays and Nature. All rights reserved.</p> <p>Made with care by <a href="https://zahintapadar.me" target="_blank" rel="noopener noreferrer" class="text-on-charcoal/50 hover:text-on-charcoal transition-colors duration-200 ml-1">@Zahin Tapadar</a></p></div></div></footer>`);
+		$$renderer.push(`<!--]--></ul></div> <div><h3 class="text-[10px] font-semibold tracking-[0.2em] uppercase text-on-charcoal/40 mb-5">Contact</h3> <ul class="space-y-3 text-sm text-on-charcoal/60"><li><a href="mailto:vsnghy.org@gmail.com" class="hover:text-on-charcoal transition-colors duration-200">vsnghy.org@gmail.com</a></li> <li><a href="tel:+919365582550" class="hover:text-on-charcoal transition-colors duration-200">+91 93655 82550</a></li></ul> <div class="mt-8"><a href="/donate" class="inline-block bg-sage hover:bg-forest text-white text-[10px] font-semibold tracking-[0.15em] uppercase px-6 py-2.5 rounded transition-colors duration-200">Support Us</a></div></div></div> <div class="flex flex-col sm:flex-row items-center justify-between gap-3 pt-7 text-[11px] text-on-charcoal/30"><p>© ${escape_html((/* @__PURE__ */ new Date()).getFullYear())} Voice of Strays and Nature. All rights reserved.</p> <p>Made with care by <a href="https://zahin-tapadar.vercel.app" target="_blank" rel="noopener noreferrer" class="text-on-charcoal/50 hover:text-on-charcoal transition-colors duration-200 ml-1">@Zahin Tapadar</a></p></div></div></footer>`);
 	});
 }
 //#endregion

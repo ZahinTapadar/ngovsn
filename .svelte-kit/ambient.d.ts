@@ -43,7 +43,6 @@ declare module '$env/static/private' {
 	export const LDFLAGS: string;
 	export const TERM_PROGRAM: string;
 	export const NODE: string;
-	export const _P9K_TTY: string;
 	export const GEMINI_CLI_IDE_WORKSPACE_PATH: string;
 	export const NOTION_TOKEN: string;
 	export const NVM_CD_FLAGS: string;
@@ -53,11 +52,9 @@ declare module '$env/static/private' {
 	export const CPPFLAGS: string;
 	export const HOMEBREW_REPOSITORY: string;
 	export const TMPDIR: string;
-	export const VSCODE_PYTHON_AUTOACTIVATE_GUARD: string;
 	export const TERM_PROGRAM_VERSION: string;
 	export const npm_config_npm_globalconfig: string;
 	export const FPATH: string;
-	export const ZDOTDIR: string;
 	export const WINDSURF_CASCADE_TERMINAL: string;
 	export const MallocNanoZone: string;
 	export const npm_config_registry: string;
@@ -70,9 +67,9 @@ declare module '$env/static/private' {
 	export const COMMAND_MODE: string;
 	export const npm_config_globalconfig: string;
 	export const PNPM_SCRIPT_SRC_DIR: string;
+	export const WINDSURF_USE_CASCADE_SANDBOX: string;
 	export const CLAUDE_CODE_SSE_PORT: string;
 	export const SSH_AUTH_SOCK: string;
-	export const VSCODE_PROFILE_INITIALIZED: string;
 	export const __CF_USER_TEXT_ENCODING: string;
 	export const npm_execpath: string;
 	export const TAURI_SIGNING_PRIVATE_KEY: string;
@@ -83,15 +80,14 @@ declare module '$env/static/private' {
 	export const PATH: string;
 	export const npm_config_engine_strict: string;
 	export const npm_package_json: string;
-	export const USER_ZDOTDIR: string;
 	export const __CFBundleIdentifier: string;
 	export const PWD: string;
 	export const npm_command: string;
 	export const VSCODE_NONCE: string;
+	export const DISABLE_AUTO_UPDATE: string;
 	export const P9K_SSH: string;
 	export const npm_config__jsr_registry: string;
 	export const npm_lifecycle_event: string;
-	export const P9K_TTY: string;
 	export const LANG: string;
 	export const npm_package_name: string;
 	export const WINDSURF_CASCADE_TERMINAL_KIND: string;
@@ -103,7 +99,6 @@ declare module '$env/static/private' {
 	export const XPC_SERVICE_NAME: string;
 	export const npm_package_version: string;
 	export const pnpm_config_verify_deps_before_run: string;
-	export const VSCODE_INJECTION: string;
 	export const SHLVL: string;
 	export const HOME: string;
 	export const VSCODE_GIT_ASKPASS_MAIN: string;
@@ -123,6 +118,7 @@ declare module '$env/static/private' {
 	export const _P9K_SSH_TTY: string;
 	export const OSLogRateLimit: string;
 	export const GIT_PAGER: string;
+	export const WINDSURF_CASCADE_TERMINAL_ID: string;
 	export const COLORTERM: string;
 	export const npm_node_execpath: string;
 	export const NODE_ENV: string;
@@ -217,7 +213,6 @@ declare module '$env/dynamic/private' {
 		LDFLAGS: string;
 		TERM_PROGRAM: string;
 		NODE: string;
-		_P9K_TTY: string;
 		GEMINI_CLI_IDE_WORKSPACE_PATH: string;
 		NOTION_TOKEN: string;
 		NVM_CD_FLAGS: string;
@@ -227,11 +222,9 @@ declare module '$env/dynamic/private' {
 		CPPFLAGS: string;
 		HOMEBREW_REPOSITORY: string;
 		TMPDIR: string;
-		VSCODE_PYTHON_AUTOACTIVATE_GUARD: string;
 		TERM_PROGRAM_VERSION: string;
 		npm_config_npm_globalconfig: string;
 		FPATH: string;
-		ZDOTDIR: string;
 		WINDSURF_CASCADE_TERMINAL: string;
 		MallocNanoZone: string;
 		npm_config_registry: string;
@@ -244,9 +237,9 @@ declare module '$env/dynamic/private' {
 		COMMAND_MODE: string;
 		npm_config_globalconfig: string;
 		PNPM_SCRIPT_SRC_DIR: string;
+		WINDSURF_USE_CASCADE_SANDBOX: string;
 		CLAUDE_CODE_SSE_PORT: string;
 		SSH_AUTH_SOCK: string;
-		VSCODE_PROFILE_INITIALIZED: string;
 		__CF_USER_TEXT_ENCODING: string;
 		npm_execpath: string;
 		TAURI_SIGNING_PRIVATE_KEY: string;
@@ -257,15 +250,14 @@ declare module '$env/dynamic/private' {
 		PATH: string;
 		npm_config_engine_strict: string;
 		npm_package_json: string;
-		USER_ZDOTDIR: string;
 		__CFBundleIdentifier: string;
 		PWD: string;
 		npm_command: string;
 		VSCODE_NONCE: string;
+		DISABLE_AUTO_UPDATE: string;
 		P9K_SSH: string;
 		npm_config__jsr_registry: string;
 		npm_lifecycle_event: string;
-		P9K_TTY: string;
 		LANG: string;
 		npm_package_name: string;
 		WINDSURF_CASCADE_TERMINAL_KIND: string;
@@ -277,7 +269,6 @@ declare module '$env/dynamic/private' {
 		XPC_SERVICE_NAME: string;
 		npm_package_version: string;
 		pnpm_config_verify_deps_before_run: string;
-		VSCODE_INJECTION: string;
 		SHLVL: string;
 		HOME: string;
 		VSCODE_GIT_ASKPASS_MAIN: string;
@@ -297,6 +288,7 @@ declare module '$env/dynamic/private' {
 		_P9K_SSH_TTY: string;
 		OSLogRateLimit: string;
 		GIT_PAGER: string;
+		WINDSURF_CASCADE_TERMINAL_ID: string;
 		COLORTERM: string;
 		npm_node_execpath: string;
 		NODE_ENV: string;
