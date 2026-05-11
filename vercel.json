@@ -1,4 +1,5 @@
 {
+  "name": "voiceofstraysandnature",
   "outputDirectory": "build",
   "framework": "sveltekit"
 }
