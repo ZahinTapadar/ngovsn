@@ -2,6 +2,7 @@
 	import '../app.css';
 	import { page } from '$app/stores';
 	import { onMount } from 'svelte';
+	import { inject } from '@vercel/analytics';
 
 	let isScrolled = false;
 	let isLoading = false;
@@ -12,6 +13,9 @@
 	}
 
 	onMount(() => {
+		// Initialize Vercel Analytics
+		inject();
+
 		if (typeof window !== 'undefined') {
 			window.addEventListener('scroll', handleScroll);
 			handleScroll(); // Check initial scroll position
