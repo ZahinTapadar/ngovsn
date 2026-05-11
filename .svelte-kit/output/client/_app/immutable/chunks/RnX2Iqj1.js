@@ -1,0 +1,1 @@
+import{Y as e}from"./Bi__zNEo.js";import{r as t}from"./5_-Qy60r.js";var n=()=>{let e=t;return{page:{subscribe:e.page.subscribe},navigating:{subscribe:e.navigating.subscribe},updated:e.updated}},r={subscribe(e){return n().page.subscribe(e)}},i={subscribe(e){return n().navigating.subscribe(e)}};e();export{r as n,i as t};

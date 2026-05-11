@@ -1,6 +1,5 @@
 import { g as store_get, h as slot, l as attr_class, v as unsubscribe_stores } from "../../chunks/environment.js";
 import { n as page } from "../../chunks/stores.js";
-//#endregion
 //#region src/routes/+layout.svelte
 function _layout($$renderer, $$props) {
 	$$renderer.component(($$renderer) => {
