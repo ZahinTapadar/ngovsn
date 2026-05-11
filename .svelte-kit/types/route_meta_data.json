@@ -1,7 +1,18 @@
 {
-	"/": [],
-	"/aboutus": [],
-	"/donate": [],
-	"/gallery": [],
-	"/volunteer": []
+	"/": [
+		"src/routes/+layout.ts",
+		"src/routes/+layout.ts"
+	],
+	"/aboutus": [
+		"src/routes/+layout.ts"
+	],
+	"/donate": [
+		"src/routes/+layout.ts"
+	],
+	"/gallery": [
+		"src/routes/+layout.ts"
+	],
+	"/volunteer": [
+		"src/routes/+layout.ts"
+	]
 }

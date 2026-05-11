@@ -16,6 +16,8 @@
 		"build-storybook": "storybook build"
 	},
 	"devDependencies": {
+		"@eslint/compat": "^2.1.0",
+		"@eslint/js": "^10.0.1",
 		"@playwright/test": "^1.28.1",
 		"@sveltejs/adapter-static": "^3.0.1",
 		"@sveltejs/kit": "^2.59.1",
@@ -27,11 +29,13 @@
 		"eslint": "^10.3.0",
 		"eslint-config-prettier": "^10.1.8",
 		"eslint-plugin-svelte": "^3.17.1",
+		"globals": "^17.6.0",
 		"postcss": "^8.4.21",
 		"postcss-import": "^16.1.0",
 		"postcss-load-config": "^5.1.0",
 		"prettier": "^3.8.3",
 		"prettier-plugin-svelte": "^3.5.2",
+		"prettier-plugin-tailwindcss": "^0.8.0",
 		"svelte": "^5.55.5",
 		"svelte-check": "^4.4.8",
 		"tailwindcss": "^3.4.19",
