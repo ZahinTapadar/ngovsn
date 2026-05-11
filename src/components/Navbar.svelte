@@ -1,91 +1,111 @@
 <script>
-    import { navigating } from '$app/stores';
-    
+    import { navigating, page } from '$app/stores';
+
     let isMenuOpen = false;
-    
+    let isScrolled = false;
+
     function toggleMenu() {
         isMenuOpen = !isMenuOpen;
+        if (typeof document !== 'undefined') {
+            document.body.style.overflow = isMenuOpen ? 'hidden' : '';
+        }
     }
 
-    // Close menu when navigation starts
     $: if ($navigating) {
         isMenuOpen = false;
+        if (typeof document !== 'undefined') {
+            document.body.style.overflow = '';
+        }
     }
+
+    if (typeof window !== 'undefined') {
+        window.addEventListener('scroll', () => {
+            isScrolled = window.scrollY > 30;
+        }, { passive: true });
+    }
+
+    $: isOnHeroPage = $page?.url?.pathname === '/';
+    $: isTransparent = isOnHeroPage && !isScrolled;
+
+    const navLinks = [
+        ['Home', '/'],
+        ['Gallery', '/gallery'],
+        ['About', '/aboutus'],
+        ['Contact', '/volunteer'],
+    ];
 </script>
 
-<nav class="bg-white/90 backdrop-blur-md shadow-sm fixed w-full top-0 z-50">
-    <div class="container mx-auto px-4">
-        <div class="flex items-center justify-between h-20">
-            <a href="/" class="nav-logo flex items-center space-x-2">
-                <img src="/img/logo.jpeg" alt="VSN Logo" class="w-10 h-10 rounded-full object-cover" />
-                <span class="text-xl font-bold text-gray-800 hover:text-green-600 transition-colors duration-300">VSN</span>
-            </a>
-            
-            <!-- Desktop Menu -->
-            <div class="hidden md:flex items-center space-x-8">
-                <div class="nav-links flex items-center space-x-8">
-                    <a href="/" class="nav-link text-gray-700 hover:text-green-600 transition-colors duration-300">Home</a>
-                    <a href="/gallery" class="nav-link text-gray-700 hover:text-green-600 transition-colors duration-300">Gallery</a>
-                    <a href="/aboutus" class="nav-link text-gray-700 hover:text-green-600 transition-colors duration-300">About</a>
-                    <a href="/volunteer" class="nav-link text-gray-700 hover:text-green-600 transition-colors duration-300">Contact</a>
+<!-- Fixed navbar: transparent over hero only, warm surface on all other pages -->
+<nav class="fixed w-full top-0 z-50 transition-all duration-500 {isTransparent ? 'bg-transparent' : 'bg-surface/95 backdrop-blur-sm'}"
+     style={isTransparent ? '' : 'box-shadow: 0 1px 0 0 #CEC5BD;'}>
+    <div class="max-w-site mx-auto px-5 lg:px-16">
+        <div class="flex items-center justify-between h-[72px]">
+
+            <!-- Logo -->
+            <a href="/" class="flex items-center gap-3 group">
+                <img src="/img/logo.jpeg" alt="VSN" class="w-9 h-9 rounded-full object-cover flex-shrink-0" />
+                <div class="leading-none">
+                    <span class="block font-display font-semibold text-[17px] {isTransparent ? 'text-white' : 'text-ink'}">VSN</span>
+                    <span class="block text-[9px] tracking-[0.18em] uppercase mt-0.5 {isTransparent ? 'text-white/60' : 'text-ink-subtle'}">Voice of Strays</span>
                 </div>
-                <a href="/donate" 
-                   class="nav-cta bg-green-500 text-white px-6 py-2.5 rounded-full hover:bg-green-600 transition-all duration-300 transform hover:scale-105">
+            </a>
+
+            <!-- Desktop Nav -->
+            <div class="hidden md:flex items-center gap-10">
+                {#each navLinks as [label, href]}
+                    <a {href} class="text-[11px] font-semibold tracking-[0.14em] uppercase transition-colors duration-200 {isTransparent ? 'text-white/80 hover:text-white' : 'text-ink-variant hover:text-sage'}">
+                        {label}
+                    </a>
+                {/each}
+            </div>
+
+            <!-- Donate CTA + Mobile toggle -->
+            <div class="flex items-center gap-4">
+                <a href="/donate" class="hidden md:inline-block bg-sage hover:bg-forest text-white text-[11px] font-semibold tracking-[0.12em] uppercase px-6 py-2.5 rounded transition-colors duration-200">
                     Donate
                 </a>
+                <button
+                    class="md:hidden p-1.5 rounded {isTransparent ? 'text-white' : 'text-ink'} transition-colors"
+                    on:click={toggleMenu}
+                    aria-label="Toggle menu"
+                >
+                    {#if isMenuOpen}
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                        </svg>
+                    {:else}
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 6h16M4 12h16M4 18h16"/>
+                        </svg>
+                    {/if}
+                </button>
             </div>
-            
-            <!-- Mobile Menu Button -->
-            <button 
-                class="nav-toggle md:hidden text-gray-700 hover:text-green-600 transition-colors duration-300 z-50"
-                on:click={toggleMenu}
-            >
-                <div class="hamburger-menu relative w-6 h-6">
-                    <span class="hamburger-line absolute w-6 h-0.5 bg-current transform transition-all duration-300 {isMenuOpen ? 'rotate-45 top-3' : 'top-1'}"></span>
-                    <span class="hamburger-line absolute w-6 h-0.5 bg-current transform transition-all duration-300 top-3 {isMenuOpen ? 'opacity-0' : 'opacity-100'}"></span>
-                    <span class="hamburger-line absolute w-6 h-0.5 bg-current transform transition-all duration-300 {isMenuOpen ? '-rotate-45 top-3' : 'top-5'}"></span>
-                </div>
-            </button>
+
         </div>
     </div>
 </nav>
 
-<!-- Full Screen Mobile Menu -->
+<!-- Mobile fullscreen menu -->
 {#if isMenuOpen}
-<div class="mobile-menu fixed inset-0 bg-white/90 backdrop-blur-lg z-40 md:hidden">
-    <div class="container mx-auto px-4 h-screen flex flex-col items-center justify-center">
-        <div class="mobile-nav-links space-y-8 text-center">
-            {#each ['Home', 'Gallery', 'About', 'Contact'] as link}
-                <div>
-                    <a 
-                        href={link === 'Home' ? '/' : link === 'About' ? '/aboutus':link === 'Contact' ? '/volunteer' : `/${link.toLowerCase()}`}
-                        class="mobile-nav-link block text-3xl font-bold text-gray-800 hover:text-green-600 transition-colors duration-300"
-                        on:click={() => isMenuOpen = false}
-                    >
-                        {link}
-                    </a>
-                </div>
-            {/each}
-            <div>
-                <a 
-                    href="/donate" 
-                    class="mobile-nav-cta inline-block bg-green-500 text-white px-8 py-3 rounded-full hover:bg-green-600 transition-all duration-300 transform hover:scale-105 text-2xl mt-8"
-                    on:click={() => isMenuOpen = false}
-                >
-                    Donate
-                </a>
-            </div>
-        </div>
-    </div>
+<div class="fixed inset-0 bg-charcoal z-40 flex flex-col items-center justify-center md:hidden">
+    <nav class="flex flex-col items-center gap-7 text-center">
+        {#each navLinks as [label, href]}
+            <a {href}
+               class="font-display italic text-4xl text-on-charcoal/90 hover:text-on-charcoal transition-colors duration-200"
+               on:click={toggleMenu}>
+                {label}
+            </a>
+        {/each}
+        <a href="/donate"
+           class="mt-5 bg-sage hover:bg-forest text-white text-xs font-semibold tracking-[0.15em] uppercase px-10 py-3 rounded transition-colors duration-200"
+           on:click={toggleMenu}>
+            Donate Now
+        </a>
+    </nav>
+    <p class="absolute bottom-8 text-[9px] tracking-[0.22em] uppercase text-on-charcoal/30">Voice of Strays & Nature</p>
 </div>
 {/if}
 
-<!-- Add padding to account for fixed navbar -->
-<div class="h-20"></div>
-
-<style>
-    .hamburger-menu {
-        cursor: pointer;
-    }
-</style>
+<!-- Spacer for fixed navbar (non-hero pages) -->
+<div class="h-[72px]"></div>
   

@@ -76,7 +76,7 @@
 	.loading-progress {
 		height: 100%;
 		width: 100%;
-		background-color: #10b981;
+		background-color: #426649;
 		animation: loading 1s ease-in-out infinite;
 	}
 

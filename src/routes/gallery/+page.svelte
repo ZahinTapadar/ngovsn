@@ -1,43 +1,32 @@
 <script>
     import { onMount, onDestroy } from 'svelte';
-    import { fadeIn } from '$lib/animations';
     import { beforeNavigate } from '$app/navigation';
     import Navbar from '../../components/Navbar.svelte';
     import Footer from '../../components/Footer.svelte';
     import AdSense from '../../components/AdSense.svelte';
 
-    // State for custom image modal
     let showModal = false;
     let currentImage = '';
     let currentTitle = '';
     let currentCategory = '';
 
-    // Function to open the modal with the selected image
+    /** @param {string} image @param {string} title @param {string} category */
     function openModal(image, title, category) {
         currentImage = image;
         currentTitle = title;
         currentCategory = category;
         showModal = true;
-        // Prevent scrolling when modal is open
-        if (typeof document !== 'undefined') {
-            document.body.style.overflow = 'hidden';
-        }
+        if (typeof document !== 'undefined') document.body.style.overflow = 'hidden';
     }
 
-    // Function to close the modal
     function closeModal() {
         showModal = false;
-        // Restore scrolling
-        if (typeof document !== 'undefined') {
-            document.body.style.overflow = '';
-        }
+        if (typeof document !== 'undefined') document.body.style.overflow = '';
     }
 
-    // Handle keyboard events for modal
+    /** @param {KeyboardEvent} event */
     function handleKeydown(event) {
-        if (showModal && event.key === 'Escape') {
-            closeModal();
-        }
+        if (showModal && event.key === 'Escape') closeModal();
     }
 
     const galleryItems = [
@@ -229,169 +218,129 @@
     ];
 
     onMount(() => {
-        fadeIn('.gallery-content');
-        
-        // Add keyboard event listener for modal
-        if (typeof window !== 'undefined') {
-            window.addEventListener('keydown', handleKeydown);
-        }
+        if (typeof window !== 'undefined') window.addEventListener('keydown', handleKeydown);
     });
 
-    // Clean up event listeners when component is destroyed
     onDestroy(() => {
         if (typeof window !== 'undefined') {
             window.removeEventListener('keydown', handleKeydown);
-            
-            // Reset body styles
             document.body.style.overflow = '';
         }
     });
-    
-    // Close modal when navigating away
-    beforeNavigate(() => {
-        closeModal();
-    });
+
+    beforeNavigate(() => closeModal());
 </script>
 
 <Navbar />
 
-<div class="gallery-content min-h-screen bg-gray-50">
-    <div class="max-w-[2000px] mx-auto p-4">
-        <div class="gallery-grid">
-            {#each galleryItems as item, index}
-                <button 
-                    class="gallery-item {item.size} border-0 p-0 bg-transparent"
-                    on:click={() => openModal(item.image, item.title, item.category)}
-                >
-                    <div class="relative overflow-hidden w-full h-full">
-                        <img 
-                            src={item.image} 
-                            alt={item.title}
-                            class="w-full h-full object-cover"
-                        />
-                        <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent opacity-0 hover:opacity-100 transition-all duration-300">
-                            <div class="absolute bottom-0 left-0 p-6">
-                                <span class="text-sm text-gray-300 mb-2 block">{item.category}</span>
-                                <h2 class="text-2xl font-bold text-white">{item.title}</h2>
-                            </div>
-                        </div>
-                    </div>
-                </button>
-            {/each}
-        </div>
+<!-- Page header -->
+<div class="bg-surface border-b border-ink-faint/30 pt-10 pb-12">
+    <div class="max-w-site mx-auto px-5 lg:px-16">
+        <p class="text-[10px] font-semibold tracking-[0.22em] uppercase text-sage mb-4">Our Work</p>
+        <h1 class="font-display font-bold text-ink leading-tight" style="font-size: clamp(2rem, 4vw, 3rem);">
+            Gallery
+        </h1>
+        <p class="text-ink-variant mt-3 max-w-xl leading-relaxed">
+            Moments of compassion captured — from daily feeding runs to community gatherings.
+        </p>
     </div>
 </div>
 
-<!-- Custom Image Modal -->
+<!-- Masonry grid -->
+<div class="bg-surface-high">
+    <div class="gallery-grid">
+        {#each galleryItems as item}
+            <button
+                class="gallery-item {item.size} group"
+                on:click={() => openModal(item.image, item.title, item.category)}
+                aria-label="View {item.title}"
+            >
+                <img src={item.image} alt={item.title} class="w-full h-full object-cover group-hover:scale-[1.03] transition-transform duration-500" />
+                <div class="absolute inset-0 bg-charcoal/0 group-hover:bg-charcoal/40 transition-colors duration-300 flex items-end p-5">
+                    <span class="text-[9px] tracking-[0.18em] uppercase text-white/0 group-hover:text-white/80 transition-colors duration-300 font-semibold">{item.category}</span>
+                </div>
+            </button>
+        {/each}
+    </div>
+</div>
+
+<!-- Modal -->
 {#if showModal}
-<div 
-    class="fixed inset-0 bg-black/90 z-50 flex items-center justify-center" 
-    on:click={closeModal}
-    on:keydown={(e) => e.key === 'Escape' && closeModal()}
+<!-- svelte-ignore a11y_no_noninteractive_element_interactions -->
+<div
+    class="fixed inset-0 bg-charcoal/95 z-50 flex items-center justify-center p-4"
     role="dialog"
     aria-modal="true"
     aria-labelledby="modal-title"
+    on:click={closeModal}
+    on:keydown={handleKeydown}
+    tabindex="-1"
 >
-    <div 
-        class="relative max-w-7xl max-h-[90vh] w-full mx-4" 
-        on:click|stopPropagation={() => {}}
-        on:keydown|stopPropagation={() => {}}
+    <!-- svelte-ignore a11y_no_noninteractive_element_interactions -->
+    <div
+        class="relative max-w-5xl w-full"
+        on:click|stopPropagation
+        on:keydown|stopPropagation
         role="document"
     >
-        <button 
-            class="absolute top-4 right-4 text-white bg-black/50 hover:bg-black/70 rounded-full p-2 transition-all z-10"
+        <button
+            class="absolute -top-10 right-0 text-on-charcoal/60 hover:text-on-charcoal transition-colors text-[10px] tracking-[0.15em] uppercase font-semibold flex items-center gap-2"
             on:click={closeModal}
-            aria-label="Close modal"
+            aria-label="Close"
         >
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
             </svg>
+            Close
         </button>
-        
-        <div class="bg-transparent rounded-lg overflow-hidden">
-            <img 
-                src={currentImage} 
-                alt={currentTitle} 
-                class="max-h-[80vh] max-w-full mx-auto object-contain"
-            />
-            <div class="p-4 bg-black/70 text-white">
-                <span class="text-sm text-gray-300 mb-1 block">{currentCategory}</span>
-                <h2 id="modal-title" class="text-xl font-bold">{currentTitle}</h2>
+        <img src={currentImage} alt={currentTitle} class="w-full max-h-[80vh] object-contain rounded" />
+        <div class="pt-4 flex items-center justify-between">
+            <div>
+                <p id="modal-title" class="font-display font-semibold text-on-charcoal capitalize">{currentTitle}</p>
+                <p class="text-[10px] tracking-[0.16em] uppercase text-on-charcoal/45 mt-0.5">{currentCategory}</p>
             </div>
         </div>
     </div>
 </div>
 {/if}
 
-<!-- AdSense Ad -->
 <AdSense />
-
 <Footer />
 
 <style>
     .gallery-grid {
         display: grid;
         grid-template-columns: repeat(6, 1fr);
-        grid-auto-rows: 300px;
-        gap: 1px;
-        background-color: #e5e7eb;
+        grid-auto-rows: 280px;
+        gap: 2px;
     }
 
     .gallery-item {
         position: relative;
         overflow: hidden;
         cursor: pointer;
-        background-color: #fff;
-        text-align: left;
+        border: none;
+        padding: 0;
+        background: #E9E0E1;
         display: block;
     }
 
-    .gallery-item.large {
-        grid-column: span 4;
-        grid-row: span 2;
-    }
-
-    .gallery-item.medium {
-        grid-column: span 2;
-        grid-row: span 2;
-    }
-
-    .gallery-item.small {
-        grid-column: span 2;
-        grid-row: span 1;
-    }
+    .gallery-item.large  { grid-column: span 4; grid-row: span 2; }
+    .gallery-item.medium { grid-column: span 2; grid-row: span 2; }
+    .gallery-item.small  { grid-column: span 2; grid-row: span 1; }
 
     @media (max-width: 1024px) {
-        .gallery-grid {
-            grid-template-columns: repeat(4, 1fr);
-        }
-
-        .gallery-item.large {
-            grid-column: span 4;
-        }
-
-        .gallery-item.medium {
-            grid-column: span 2;
-        }
-
-        .gallery-item.small {
-            grid-column: span 2;
-        }
+        .gallery-grid { grid-template-columns: repeat(4, 1fr); }
+        .gallery-item.large  { grid-column: span 4; }
+        .gallery-item.medium { grid-column: span 2; }
+        .gallery-item.small  { grid-column: span 2; }
     }
 
     @media (max-width: 640px) {
-        .gallery-grid {
-            grid-template-columns: repeat(2, 1fr);
-        }
-
+        .gallery-grid { grid-template-columns: repeat(2, 1fr); grid-auto-rows: 200px; }
         .gallery-item.large,
-        .gallery-item.medium {
-            grid-column: span 2;
-        }
-
-        .gallery-item.small {
-            grid-column: span 1;
-        }
+        .gallery-item.medium { grid-column: span 2; }
+        .gallery-item.small  { grid-column: span 1; }
     }
 </style>
   
