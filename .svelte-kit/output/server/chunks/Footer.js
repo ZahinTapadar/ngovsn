@@ -28,7 +28,7 @@ function Navbar($$renderer, $$props) {
 			let [label, href] = each_array[$$index];
 			$$renderer.push(`<a${attr("href", href)}${attr_class(`text-[11px] font-semibold tracking-[0.14em] uppercase transition-colors duration-200 ${stringify(isTransparent ? "text-white/80 hover:text-white" : "text-ink-variant hover:text-sage")}`)}>${escape_html(label)}</a>`);
 		}
-		$$renderer.push(`<!--]--></div> <div class="flex items-center gap-4"><a href="/donate" class="hidden md:inline-block bg-sage hover:bg-forest text-white text-[11px] font-semibold tracking-[0.12em] uppercase px-6 py-2.5 rounded transition-colors duration-200">Donate</a> <button${attr_class(`md:hidden p-1.5 rounded ${stringify(isTransparent ? "text-white" : "text-ink")} transition-colors`)} aria-label="Toggle menu">`);
+		$$renderer.push(`<!--]--></div> <div class="flex items-center gap-4"><a href="/donate" class="hidden md:inline-block bg-sage hover:bg-forest text-white text-[11px] font-semibold tracking-[0.12em] uppercase px-6 py-2.5 rounded transition-colors duration-200">Donate</a> <button${attr_class(`md:hidden p-1.5 rounded ${stringify(isTransparent ? "text-white" : "text-ink")} transition-colors relative w-8 h-8`)} aria-label="Toggle menu"><div class="absolute inset-0 flex items-center justify-center">`);
 		if (isMenuOpen) {
 			$$renderer.push("<!--[0-->");
 			$$renderer.push(`<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>`);
@@ -36,16 +36,16 @@ function Navbar($$renderer, $$props) {
 			$$renderer.push("<!--[-1-->");
 			$$renderer.push(`<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 6h16M4 12h16M4 18h16"></path></svg>`);
 		}
-		$$renderer.push(`<!--]--></button></div></div></div></nav> `);
+		$$renderer.push(`<!--]--></div></button></div></div></div></nav> `);
 		if (isMenuOpen) {
 			$$renderer.push("<!--[0-->");
 			$$renderer.push(`<div class="fixed inset-0 bg-charcoal z-40 flex flex-col items-center justify-center md:hidden"><nav class="flex flex-col items-center gap-7 text-center"><!--[-->`);
 			const each_array_1 = ensure_array_like(navLinks);
-			for (let $$index_1 = 0, $$length = each_array_1.length; $$index_1 < $$length; $$index_1++) {
-				let [label, href] = each_array_1[$$index_1];
-				$$renderer.push(`<a${attr("href", href)} class="font-display italic text-4xl text-on-charcoal/90 hover:text-on-charcoal transition-colors duration-200">${escape_html(label)}</a>`);
+			for (let i = 0, $$length = each_array_1.length; i < $$length; i++) {
+				let [label, href] = each_array_1[i];
+				$$renderer.push(`<a${attr("href", href)} class="font-display italic text-4xl text-on-charcoal/90 hover:text-on-charcoal transition-all duration-200 hover:scale-105">${escape_html(label)}</a>`);
 			}
-			$$renderer.push(`<!--]--> <a href="/donate" class="mt-5 bg-sage hover:bg-forest text-white text-xs font-semibold tracking-[0.15em] uppercase px-10 py-3 rounded transition-colors duration-200">Donate Now</a></nav> <p class="absolute bottom-8 text-[9px] tracking-[0.22em] uppercase text-on-charcoal/30">Voice of Strays &amp; Nature</p></div>`);
+			$$renderer.push(`<!--]--> <a href="/donate" class="mt-5 bg-sage hover:bg-forest text-white text-xs font-semibold tracking-[0.15em] uppercase px-10 py-3 rounded transition-all duration-200 hover:scale-105">Donate Now</a></nav> <p class="absolute bottom-8 text-[9px] tracking-[0.22em] uppercase text-on-charcoal/30">Voice of Strays &amp; Nature</p></div>`);
 		} else $$renderer.push("<!--[-1-->");
 		$$renderer.push(`<!--]--> <div class="h-[72px]"></div>`);
 		if ($$store_subs) unsubscribe_stores($$store_subs);

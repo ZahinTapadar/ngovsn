@@ -70,7 +70,7 @@
             <p>© {new Date().getFullYear()} Voice of Strays and Nature. All rights reserved.</p>
             <p>
                 Made with care by
-                <a href="https://zahintapadar.me" target="_blank" rel="noopener noreferrer"
+                <a href="https://zahin-tapadar.vercel.app" target="_blank" rel="noopener noreferrer"
                    class="text-on-charcoal/50 hover:text-on-charcoal transition-colors duration-200 ml-1">
                     @Zahin Tapadar
                 </a>

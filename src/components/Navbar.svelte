@@ -1,5 +1,7 @@
 <script>
     import { navigating, page } from '$app/stores';
+    import { fade, fly, scale } from 'svelte/transition';
+    import { quintOut, backOut } from 'svelte/easing';
 
     let isMenuOpen = false;
     let isScrolled = false;
@@ -65,19 +67,35 @@
                     Donate
                 </a>
                 <button
-                    class="md:hidden p-1.5 rounded {isTransparent ? 'text-white' : 'text-ink'} transition-colors"
+                    class="md:hidden p-1.5 rounded {isTransparent ? 'text-white' : 'text-ink'} transition-colors relative w-8 h-8"
                     on:click={toggleMenu}
                     aria-label="Toggle menu"
                 >
-                    {#if isMenuOpen}
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
-                        </svg>
-                    {:else}
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 6h16M4 12h16M4 18h16"/>
-                        </svg>
-                    {/if}
+                    <div class="absolute inset-0 flex items-center justify-center">
+                        {#if isMenuOpen}
+                            <svg 
+                                class="w-5 h-5" 
+                                fill="none" 
+                                stroke="currentColor" 
+                                viewBox="0 0 24 24"
+                                in:scale={{ duration: 300, easing: backOut, start: 0.5 }}
+                                out:fade={{ duration: 150 }}
+                            >
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                            </svg>
+                        {:else}
+                            <svg 
+                                class="w-5 h-5" 
+                                fill="none" 
+                                stroke="currentColor" 
+                                viewBox="0 0 24 24"
+                                in:scale={{ duration: 300, easing: backOut, start: 0.5 }}
+                                out:fade={{ duration: 150 }}
+                            >
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 6h16M4 12h16M4 18h16"/>
+                            </svg>
+                        {/if}
+                    </div>
                 </button>
             </div>
 
@@ -87,22 +105,36 @@
 
 <!-- Mobile fullscreen menu -->
 {#if isMenuOpen}
-<div class="fixed inset-0 bg-charcoal z-40 flex flex-col items-center justify-center md:hidden">
+<div 
+    class="fixed inset-0 bg-charcoal z-40 flex flex-col items-center justify-center md:hidden"
+    in:fade={{ duration: 400, easing: quintOut }}
+    out:fade={{ duration: 300, easing: quintOut }}
+>
     <nav class="flex flex-col items-center gap-7 text-center">
-        {#each navLinks as [label, href]}
+        {#each navLinks as [label, href], i}
             <a {href}
-               class="font-display italic text-4xl text-on-charcoal/90 hover:text-on-charcoal transition-colors duration-200"
-               on:click={toggleMenu}>
+               class="font-display italic text-4xl text-on-charcoal/90 hover:text-on-charcoal transition-all duration-200 hover:scale-105"
+               on:click={toggleMenu}
+               in:fly={{ y: 30, duration: 500, delay: 100 + i * 80, easing: backOut }}
+               out:fly={{ y: -20, duration: 300, delay: (navLinks.length - i) * 50, easing: quintOut }}
+            >
                 {label}
             </a>
         {/each}
         <a href="/donate"
-           class="mt-5 bg-sage hover:bg-forest text-white text-xs font-semibold tracking-[0.15em] uppercase px-10 py-3 rounded transition-colors duration-200"
-           on:click={toggleMenu}>
+           class="mt-5 bg-sage hover:bg-forest text-white text-xs font-semibold tracking-[0.15em] uppercase px-10 py-3 rounded transition-all duration-200 hover:scale-105"
+           on:click={toggleMenu}
+           in:scale={{ duration: 400, delay: 100 + navLinks.length * 80, easing: backOut, start: 0.8 }}
+           out:scale={{ duration: 250, easing: quintOut, start: 0.9 }}
+        >
             Donate Now
         </a>
     </nav>
-    <p class="absolute bottom-8 text-[9px] tracking-[0.22em] uppercase text-on-charcoal/30">Voice of Strays & Nature</p>
+    <p 
+        class="absolute bottom-8 text-[9px] tracking-[0.22em] uppercase text-on-charcoal/30"
+        in:fade={{ duration: 600, delay: 500, easing: quintOut }}
+        out:fade={{ duration: 200 }}
+    >Voice of Strays & Nature</p>
 </div>
 {/if}
 
