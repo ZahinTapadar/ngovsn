@@ -206,15 +206,50 @@
             image: "/img/group7.jpeg",
             size: "large"
         },
+        {
+            title: "feeding",
+            category: "FEEDING",
+            image: "/img/img23.jpg",
+            size: "medium"
+        },
+        {
+            title: "feeding",
+            category: "FEEDING",
+            image: "/img/img24.jpg",
+            size: "medium"
+        },
+        {
+            title: "group",
+            category: "GROUP",
+            image: "/img/group8.jpg",
+            size: "large"
+        },
+        {
+            title: "feeding",
+            category: "FEEDING",
+            image: "/img/img25.jpg",
+            size: "medium"
+        },
+        {
+            title: "feeding",
+            category: "FEEDING",
+            image: "/img/img26.jpg",
+            size: "small"
+        },
+        {
+            title: "feeding",
+            category: "FEEDING",
+            image: "/img/img27.jpg",
+            size: "medium"
+        },
+        {
+            title: "feeding",
+            category: "FEEDING",
+            image: "/img/img28.jpg",
+            size: "small"
+        },
 
-        
-        
-        
-        
-        
-        
-        
-    ];
+];
 
     onMount(() => {
         if (typeof window !== 'undefined') window.addEventListener('keydown', handleKeydown);
