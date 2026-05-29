@@ -48,7 +48,7 @@
                 <img src="/img/logo.jpeg" alt="VSN" class="w-9 h-9 rounded-full object-cover flex-shrink-0" />
                 <div class="leading-none">
                     <span class="block font-display font-semibold text-[17px] {isTransparent ? 'text-white' : 'text-ink'}">VSN</span>
-                    <span class="block text-[9px] tracking-[0.18em] uppercase mt-0.5 {isTransparent ? 'text-white/60' : 'text-ink-subtle'}">Voice of Strays</span>
+                    <span class="block text-[9px] tracking-[0.18em] uppercase mt-0.5 {isTransparent ? 'text-white/60' : 'text-ink-subtle'}">Voice of Strays & Nature</span>
                 </div>
             </a>
 

@@ -28,7 +28,7 @@
         {
             icon: 'M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4',
             title: 'Our Impact',
-            body: 'Since 2020, we\'ve fed over 500 animals, built a network of 100+ volunteers, and served 50+ communities across the region.',
+            body: 'Since 2025, we\'ve fed over 1000+ animals and built a network of 100+ volunteers.',
         },
         {
             icon: 'M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z',
@@ -49,7 +49,7 @@
         </h1>
         <div class="w-14 h-px bg-sage/40 my-6"></div>
         <p class="text-ink-variant text-lg leading-relaxed max-w-2xl">
-            Dedicated to giving every stray animal a second chance — through compassion, community, and sustained action since 2020.
+            Dedicated to giving every stray animal a second chance — through compassion, community, and sustained action since 2025.
         </p>
     </div>
 </div>
@@ -67,7 +67,7 @@
                     Voice of Strays and Nature began with a simple act — feeding a hungry dog on the street. That single moment grew into a movement, connecting hundreds of volunteers across the region who share one belief: that every animal deserves to be seen, fed, and loved.
                 </p>
                 <p class="text-ink-variant leading-relaxed">
-                    Today we run regular feeding programs, community education initiatives, and volunteer networks that reach over 50 communities. But at our core, we remain what we have always been — a family of people who care.
+                    Today we run regular feeding programs, community education initiatives, and volunteer networks. But at our core, we remain what we have always been — a family of people who care.
                 </p>
             </div>
             <div class="rounded-xl overflow-hidden shadow-card">

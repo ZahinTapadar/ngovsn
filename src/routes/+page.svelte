@@ -64,7 +64,7 @@
 <div class="bg-surface-mid border-y border-ink-faint/40 reveal">
     <div class="max-w-site mx-auto px-5 lg:px-16">
         <div class="grid grid-cols-3 divide-x divide-ink-faint/40">
-            {#each [['500+','Animals Fed Monthly'],['100+','Active Volunteers'],['50+','Communities Reached']] as [num, label]}
+            {#each [['200+','Animals Fed Monthly'],['100+','Active Volunteers'],['10+','Rescue cases supported']] as [num, label]}
                 <div class="py-10 text-center px-4">
                     <div class="font-display font-bold text-3xl lg:text-4xl text-sage mb-1">{num}</div>
                     <div class="text-[11px] tracking-[0.12em] uppercase text-ink-subtle">{label}</div>
